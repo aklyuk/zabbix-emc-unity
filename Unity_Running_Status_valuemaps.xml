@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.0</version>
+    <date>2019-09-23T15:55:33Z</date>
+    <value_maps>
+        <value_map>
+            <name>Unity_Running_Status</name>
+            <mappings>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>NOT_OK</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>DISK_SLOT_EMPTY</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>COMPONENT_OK</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>Link_up</newvalue>
+                </mapping>
+                <mapping>
+                    <value>11</value>
+                    <newvalue>Link_down</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.0</version>
+    <date>2019-09-23T15:55:12Z</date>
+    <value_maps>
+        <value_map>
+            <name>Unity_Health_Status</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>UNKNOWN</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>OK</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>OK_BUT</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>DEGRADED</newvalue>
+                </mapping>
+                <mapping>
+                    <value>15</value>
+                    <newvalue>MINOR</newvalue>
+                </mapping>
+                <mapping>
+                    <value>20</value>
+                    <newvalue>MAJOR</newvalue>
+                </mapping>
+                <mapping>
+                    <value>25</value>
+                    <newvalue>CRITICAL</newvalue>
+                </mapping>
+                <mapping>
+                    <value>30</value>
+                    <newvalue>NON_RECOVERABLE</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>

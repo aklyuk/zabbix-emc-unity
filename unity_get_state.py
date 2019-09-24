@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -11,8 +11,11 @@ import logging
 import logging.handlers
 import requests
 import urllib3
-urllib3.disable_warnings()
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+#urllib3.disable_warnings()
+#urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 # Создаем лог-объект
@@ -39,11 +42,11 @@ def api_connect(api_user, api_password, api_ip, api_port):
 
 	try:
 		login = session_unity.get(api_login_url, verify=False)
-	except Exception as oops:
-		unity_logger.error("Connection Error Occurs: {0}".format(oops))
+	except Exception as zalupa:
+		unity_logger.error("Connection Error Occurs: {0}".format(zalupa))
 		sys.exit("50")
 
-	if login.status_code <> 200:
+	if login.status_code != 200:
 		unity_logger.error("Connection Return Code = {0}".format(login.status_code))
 		sys.exit("60")
 	elif login.text.find("isPasswordChangeRequired") >= 0: # Если в выводе логина найдена строка isPasswordChangeRequired, логин произошел успешно
@@ -61,11 +64,11 @@ def api_logout(api_ip, session_unity):
 
 	try:
 		logout = session_unity.post(api_logout_url, verify=False)
-	except Exception as oops:
-		unity_logger.error("Logout Error Occurs: {0}".format(oops))
+	except Exception as zalupa:
+		unity_logger.error("Logout Error Occurs: {0}".format(zalupa))
 		sys.exit("150")
 
-	if logout.status_code <> 200:
+	if logout.status_code != 200:
 		unity_logger.error("Logout status = {0}".format(logout.status_code))
 		sys.exit("160")
 	elif logout.text.find("Logout successful") >= 0:
@@ -100,7 +103,7 @@ def send_data_to_zabbix(zabbix_data, storage_name):
 def discovering_resources(api_user, api_password, api_ip, api_port, storage_name, list_resources):
 	api_session = api_connect(api_user, api_password, api_ip, api_port)
 
-	something = []
+	xer = []
 	try:
 		for resource in list_resources:
 			resource_url = "https://{0}:{1}/api/types/{2}/instances?fields=name".format(api_ip, api_port, resource)
@@ -116,17 +119,17 @@ def discovering_resources(api_user, api_password, api_ip, api_port, storage_name
 					discovered_resource.append(one_object_list)
 				else:
 					one_object_list = {}
-	                                one_object_list["{#ID}"] = one_object['content']['id']
+					one_object_list["{#ID}"] = one_object['content']['id']
 					discovered_resource.append(one_object_list)
 			converted_resource = convert_to_zabbix_json(discovered_resource)
 			timestampnow = int(time.time())
-			something.append("%s %s %s %s" % (storage_name, resource, timestampnow, converted_resource))
+			xer.append("%s %s %s %s" % (storage_name, resource, timestampnow, converted_resource))
 	except Exception as pizdec:
 		unity_logger.error("Error occurs in discovering")
 		sys.exit("1000")
 
 	api_session_logout = api_logout(api_ip, api_session)
-	return send_data_to_zabbix(something, storage_name)
+	return send_data_to_zabbix(xer, storage_name)
 
 
 
@@ -175,7 +178,7 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 					key_sizeTotalBytes = "sizeTotalBytes.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
 					key_sizeSubscribedBytes = "sizeSubscribedBytes.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
 
-	                                state_resources.append("%s %s %s %s" % (storage_name, key_health, timestampnow, one_object['content']['health']['value']))
+					state_resources.append("%s %s %s %s" % (storage_name, key_health, timestampnow, one_object['content']['health']['value']))
 					state_resources.append("%s %s %s %s" % (storage_name, key_sizeUsedBytes, timestampnow, one_object['content']['sizeUsed']))
 					state_resources.append("%s %s %s %s" % (storage_name, key_sizeTotalBytes, timestampnow, one_object['content']['sizeTotal']))
 					state_resources.append("%s %s %s %s" % (storage_name, key_sizeSubscribedBytes, timestampnow, one_object['content']['sizeSubscribed']))
@@ -199,34 +202,32 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 		sys.exit("1000")
 
 	api_session_logout = api_logout(api_ip, api_session)
-        return send_data_to_zabbix(state_resources, storage_name)
+	return send_data_to_zabbix(state_resources, storage_name)
 
 
 
 def main():
 	# Парсим аргументы		
-        unity_parser = argparse.ArgumentParser()
-        unity_parser.add_argument('--api_ip', action="store", help="Where to connect", required=True)
-        unity_parser.add_argument('--api_port', action="store", required=True)
-        unity_parser.add_argument('--api_user', action="store", required=True)
-        unity_parser.add_argument('--api_password', action="store", required=True)
-        unity_parser.add_argument('--storage_name', action="store", required=True)
+	unity_parser = argparse.ArgumentParser()
+	unity_parser.add_argument('--api_ip', action="store", help="Where to connect", required=True)
+	unity_parser.add_argument('--api_port', action="store", required=True)
+	unity_parser.add_argument('--api_user', action="store", required=True)
+	unity_parser.add_argument('--api_password', action="store", required=True)
+	unity_parser.add_argument('--storage_name', action="store", required=True)
 
-        group = unity_parser.add_mutually_exclusive_group(required=True)
-        group.add_argument('--discovery', action ='store_true')
-        group.add_argument('--status', action='store_true')
-        arguments = unity_parser.parse_args()
+	group = unity_parser.add_mutually_exclusive_group(required=True)
+	group.add_argument('--discovery', action ='store_true')
+	group.add_argument('--status', action='store_true')
+	arguments = unity_parser.parse_args()
 
-
-	list_resources = ['battery', 'ssd', 'ethernetPort', 'fcPort', 'sasPort', 'fan', 'powerSupply', 'storageProcessor', 'lun', 'pool', 'dae', 'dpe', 'ioModule', 'lcc', 'memoryModule', 'ssc', 'uncommittedPort', 'disk']
-        if arguments.discovery:
-                result_discovery = discovering_resources(arguments.api_user, arguments.api_password, arguments.api_ip, arguments.api_port, arguments.storage_name, list_resources)
-                print result_discovery
-        elif arguments.status:
-                result_status = get_status_resources(arguments.api_user, arguments.api_password, arguments.api_ip, arguments.api_port, arguments.storage_name, list_resources)
-                print result_status
-
+	list_resources = ['battery','ssd','ethernetPort','fcPort','sasPort','fan','powerSupply','storageProcessor','lun','pool','dae','dpe','ioModule','lcc','memoryModule','ssc','uncommittedPort','disk']
+	if arguments.discovery:
+		result_discovery = discovering_resources(arguments.api_user, arguments.api_password, arguments.api_ip, arguments.api_port, arguments.storage_name, list_resources)
+		print (result_discovery)
+	elif arguments.status:
+		result_status = get_status_resources(arguments.api_user, arguments.api_password, arguments.api_ip, arguments.api_port, arguments.storage_name, list_resources)
+		print (result_status)
 
 if __name__ == "__main__":
-        main()
+	main()
 

@@ -42,8 +42,8 @@ def api_connect(api_user, api_password, api_ip, api_port):
 
 	try:
 		login = session_unity.get(api_login_url, verify=False)
-	except Exception as zalupa:
-		unity_logger.error("Connection Error Occurs: {0}".format(zalupa))
+	except Exception as oops:
+		unity_logger.error("Connection Error Occurs: {0}".format(oops))
 		sys.exit("50")
 
 	if login.status_code != 200:
@@ -64,8 +64,8 @@ def api_logout(api_ip, session_unity):
 
 	try:
 		logout = session_unity.post(api_logout_url, verify=False)
-	except Exception as zalupa:
-		unity_logger.error("Logout Error Occurs: {0}".format(zalupa))
+	except Exception as oops:
+		unity_logger.error("Logout Error Occurs: {0}".format(oops))
 		sys.exit("150")
 
 	if logout.status_code != 200:

@@ -11,7 +11,7 @@ In template "Template EMC Unity REST-API" in section "Macros" need set these mac
 - {$API_PASSWORD}
 - {$API_PORT}
 - {$SUBSCRIBED_PERCENT}
--{$USED_PERCENT}
+- {$USED_PERCENT}
 
 In Linux-console need run this command to make discovery. Script must return value 0 in case of success.
 ```bash

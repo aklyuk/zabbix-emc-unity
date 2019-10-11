@@ -5,10 +5,18 @@ Python script for monitoring EMC Unity storages
 - Level - Read-only user
 - Role - Administrator
 
-In template "Template EMC Unity REST-API" in section "Macros" need set these macros - {$API_USER}, {$API_PASSWORD}, {$API_PORT}, {$SUBSCRIBED_PERCENT}, {$USED_PERCENT}
 
-In Linux-console need run this command
+In template "Template EMC Unity REST-API" in section "Macros" need set these macros:
+- {$API_USER}
+- {$API_PASSWORD}
+- {$API_PORT}
+- {$SUBSCRIBED_PERCENT}
+-{$USED_PERCENT}
+
+In Linux-console need run this command:
+```bash
 ./unity_get_state.py --api_ip=xxx.xxx.xxx.xxx --api_port=443 --api_user=user --api_password='password' --storage_name="storage-name_in_zabbix" --discovery
+```
 to make discovery. Script must return value 0 in case of success
 
 In Linux-console need run this command

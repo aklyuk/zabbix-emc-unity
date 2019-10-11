@@ -1,6 +1,10 @@
 # zabbix-emc-unity
 Python script for monitoring EMC Unity storages
 
+User on Unity must be:
+Level - Read-only user
+Role - Administrator
+
 In template "Template EMC Unity REST-API" in section "Macros" need set these macros - {$API_USER}, {$API_PASSWORD}, {$API_PORT}, {$SUBSCRIBED_PERCENT}, {$USED_PERCENT}
 
 In Linux-console need run this command

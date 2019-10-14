@@ -10,7 +10,7 @@ In template "Template EMC Unity REST-API" in section "Macros" need set these mac
 - {$SUBSCRIBED_PERCENT}
 - {$USED_PERCENT}
 
-In configuration agent file, ##/etc/zabbix/zabbix_agentd.conf must be set parameter ##ServerActive=xxx.xxx.xxx.xxx
+In configuration agent file, ## /etc/zabbix/zabbix_agentd.conf must be set parameter ## ServerActive=xxx.xxx.xxx.xxx
 
 In Linux-console need run this command to make discovery. Script must return value 0 in case of success.
 ```bash

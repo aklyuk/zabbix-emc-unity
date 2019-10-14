@@ -21,3 +21,4 @@ In Linux-console need run this command to get value of metrics. Scripts must ret
 ```bash
 ./unity_get_stateNEW.py --api_ip=xxx.xxx.xxx.xxx --api_port=443 --api_user=user --api_password='password' --storage_name="storage-name_in_zabbix" --status
 ```
+If you have executed these scripts from console from user root or from another user, please check access permission on file **/tmp/unity_state.log**. It must be allow read, write to user zabbix.

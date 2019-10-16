@@ -18,19 +18,19 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
-# Создаем лог-объект
+# Create log-object
 LOG_FILENAME = "/tmp/unity_state.log"
 unity_logger = logging.getLogger("unity_logger")
 unity_logger.setLevel(logging.INFO)
 
-# Устанавливаем хэндлер
-unity_handler = logging.handlers.RotatingFileHandler(LOG_FILENAME, maxBytes=1024*1024*1024, backupCount=5)
+# Set handler
+unity_handler = logging.handlers.RotatingFileHandler(LOG_FILENAME, maxBytes=1024*1024, backupCount=5)
 unity_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-# Устанавливаем форматтер для хэндлера
+# Set formatter for handler
 unity_handler.setFormatter(unity_formatter)
 
-# Добавляем хэндлер к лог-объекту
+# Add handler to log-object
 unity_logger.addHandler(unity_handler)
 
 
@@ -49,7 +49,7 @@ def api_connect(api_user, api_password, api_ip, api_port):
 	if login.status_code != 200:
 		unity_logger.error("Connection Return Code = {0}".format(login.status_code))
 		sys.exit("60")
-	elif login.text.find("isPasswordChangeRequired") >= 0: # Если в выводе логина найдена строка isPasswordChangeRequired, логин произошел успешно
+	elif login.text.find("isPasswordChangeRequired") >= 0: # If i can find string "isPasswordChangeRequired" therefore login is successful
 		unity_logger.info("Connection established")
 		return session_unity
 	else:
@@ -124,7 +124,7 @@ def discovering_resources(api_user, api_password, api_ip, api_port, storage_name
 			converted_resource = convert_to_zabbix_json(discovered_resource)
 			timestampnow = int(time.time())
 			xer.append("%s %s %s %s" % (storage_name, resource, timestampnow, converted_resource))
-	except Exception as pizdec:
+	except Exception as oops:
 		unity_logger.error("Error occurs in discovering")
 		sys.exit("1000")
 
@@ -136,18 +136,18 @@ def discovering_resources(api_user, api_password, api_ip, api_port, storage_name
 def get_status_resources(api_user, api_password, api_ip, api_port, storage_name, list_resources):
 	api_session = api_connect(api_user, api_password, api_ip, api_port)
 
-	state_resources = [] # В этот список будут складываться состояние каждого ресурса (объекта) в формате zabbix
+	state_resources = [] # This list will persist state of resources (pool, lun, fcPort, battery, diks, ...) on zabbix format
 	try:
 		for resource in list_resources:
-			# Генерируем разные URI для разных ресурсов
+			# Create different URI for different resources
 			if ['pool'].count(resource) == 1:
 				resource_url = "https://{0}:{1}/api/types/{2}/instances?fields=name,health,sizeTotal,sizeUsed,sizeSubscribed".format(api_ip, api_port, resource)
 			elif ['lun'].count(resource) == 1:
-				resource_url = "https://{0}:{1}/api/types/{2}/instances?fields=name,health".format(api_ip, api_port, resource)
+				resource_url = "https://{0}:{1}/api/types/{2}/instances?fields=name,health,sizeTotal,sizeAllocated".format(api_ip, api_port, resource)
 			else:
 				resource_url = "https://{0}:{1}/api/types/{2}/instances?fields=name,health,needsReplacement".format(api_ip, api_port, resource)
 
-			# Получаем информацию об одном ресурсе
+			# Get info about one resource
 			resource_info = api_session.get(resource_url, verify=False)
 			resource_info = json.loads(resource_info.content.decode('utf8'))
 			timestampnow = int(time.time())
@@ -158,9 +158,9 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 					key_status = "link.{0}.[{1}]".format(resource, one_object['content']['id'].replace(' ', '_'))
 					state_resources.append("%s %s %s %s" % (storage_name, key_health, timestampnow, one_object['content']['health']['value']))
 
-					# Получаем состояние линков интерфейсов из дескрипшена
-					descriptionIds = str(one_object['content']['health']['descriptionIds'][0]) # Конвертируем дескрипшн в строку
-					if descriptionIds.find("LINK_UP") >= 0: # Из дескрипшена узнаем, линк в апе или в дауне
+					# Get state of interfaces from description
+					descriptionIds = str(one_object['content']['health']['descriptionIds'][0]) # Convert description to string
+					if descriptionIds.find("LINK_UP") >= 0: # From description i can known, link is up or link is down
 						link_status = 10
 					elif descriptionIds.find("LINK_DOWN") >=0:
 						link_status = 11
@@ -169,11 +169,16 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 
 			elif ['lun'].count(resource) == 1:
 				for one_object in resource_info['entries']:
-					key_health = "health.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_')) # Используем имя луна вместо ID в ключе
+					key_health = "health.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_')) # Use lun name instead lun id on zabbix key
+					key_sizeTotal = "sizeTotal.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
+					key_sizeAllocated = "sizeAllocated.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
+
 					state_resources.append("%s %s %s %s" % (storage_name, key_health, timestampnow, one_object['content']['health']['value']))
+					state_resources.append("%s %s %s %s" % (storage_name, key_sizeTotal, timestampnow, one_object['content']['sizeTotal']))
+					state_resources.append("%s %s %s %s" % (storage_name, key_sizeAllocated, timestampnow, one_object['content']['sizeAllocated']))
 			elif ['pool'].count(resource) == 1:
 				for one_object in resource_info['entries']:
-					key_health = "health.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_')) # Используем имя луна вместо ID в ключе
+					key_health = "health.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_')) # Use pull name instead lun id on zabbix key
 					key_sizeUsedBytes = "sizeUsedBytes.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
 					key_sizeTotalBytes = "sizeTotalBytes.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
 					key_sizeSubscribedBytes = "sizeSubscribedBytes.{0}.[{1}]".format(resource, one_object['content']['name'].replace(' ', '_'))
@@ -184,8 +189,8 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 					state_resources.append("%s %s %s %s" % (storage_name, key_sizeSubscribedBytes, timestampnow, one_object['content']['sizeSubscribed']))
 			else:
 				for one_object in resource_info['entries']:
-					# Получаем состояние ресурсов из дескрипшена
-					descriptionIds = str(one_object['content']['health']['descriptionIds'][0]) # Конвертируем дескрипшн в строку
+					# Get state of resources from description
+					descriptionIds = str(one_object['content']['health']['descriptionIds'][0]) # Convert description to string
 					if descriptionIds.find("ALRT_COMPONENT_OK") >= 0:
 						running_status = 8
 					elif descriptionIds.find("ALRT_DISK_SLOT_EMPTY") >= 0:
@@ -197,7 +202,7 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 					key_status = "running.{0}.[{1}]".format(resource, one_object['content']['id'].replace(' ', '_'))
 					state_resources.append("%s %s %s %s" % (storage_name, key_health, timestampnow, one_object['content']['health']['value']))
 					state_resources.append("%s %s %s %s" % (storage_name, key_status, timestampnow, running_status))
-	except Exception as pizdec:
+	except Exception as oops:
 		unity_logger.error("Error occured in get state")
 		sys.exit("1000")
 
@@ -207,7 +212,7 @@ def get_status_resources(api_user, api_password, api_ip, api_port, storage_name,
 
 
 def main():
-	# Парсим аргументы		
+	# Parsing arguments
 	unity_parser = argparse.ArgumentParser()
 	unity_parser.add_argument('--api_ip', action="store", help="Where to connect", required=True)
 	unity_parser.add_argument('--api_port', action="store", required=True)

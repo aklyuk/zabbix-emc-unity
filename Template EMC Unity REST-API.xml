@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2019-09-23T12:49:03Z</date>
+    <date>2019-10-16T08:23:07Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>Template EMC Unity REST-API</template>
-            <name>Template EMC Unity REST-API</name>
+            <template>Template EMC Unity REST-API v3</template>
+            <name>Template EMC Unity REST-API v3</name>
             <description/>
             <groups>
                 <group>
@@ -65,6 +65,9 @@
                 </application>
                 <application>
                     <name>LCC health</name>
+                </application>
+                <application>
+                    <name>LUN</name>
                 </application>
                 <application>
                     <name>LUN health</name>
@@ -445,7 +448,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.battery.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.battery.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; BBU &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -461,7 +464,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.battery.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.battery.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; BBU &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -657,7 +660,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.dae.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.dae.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; DAE &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -673,7 +676,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.dae.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.dae.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; DAE &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -869,7 +872,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.disk.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.disk.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Hard disk &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -885,7 +888,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API:running.disk.[{#ID}].last()}=6 and {Template EMC Unity REST-API:running.disk.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API:running.disk.[{#ID}].change()}=0) or  ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API:running.disk.[{#ID}].last()}&lt;&gt;8 and {Template EMC Unity REST-API:running.disk.[{#ID}].change()}=1)</expression>
+                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API v3:running.disk.[{#ID}].last()}=6 and {Template EMC Unity REST-API v3:running.disk.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API v3:running.disk.[{#ID}].change()}=0) or  ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API v3:running.disk.[{#ID}].last()}&lt;&gt;8 and {Template EMC Unity REST-API v3:running.disk.[{#ID}].change()}=1)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Hard disk &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -1081,7 +1084,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.dpe.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.dpe.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; DPE &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -1097,7 +1100,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.dpe.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.dpe.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; DPE &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -1293,7 +1296,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.ethernetPort.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.ethernetPort.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Ethernet Port &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -1309,7 +1312,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API:link.ethernetPort.[{#ID}].last()}=11 and {Template EMC Unity REST-API:link.ethernetPort.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API:link.ethernetPort.[{#ID}].change()}=0)</expression>
+                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API v3:link.ethernetPort.[{#ID}].last()}=11 and {Template EMC Unity REST-API v3:link.ethernetPort.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API v3:link.ethernetPort.[{#ID}].change()}=0)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Ethernet Port &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -1506,7 +1509,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.fan.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.fan.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; FAN &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -1522,7 +1525,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.fan.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.fan.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; FAN &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -1718,7 +1721,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.fcPort.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.fcPort.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; FibreChannel Port &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -1734,7 +1737,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API:link.fcPort.[{#ID}].last()}=11 and {Template EMC Unity REST-API:link.fcPort.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1) and {Template EMC Unity REST-API:link.fcPort.[{#ID}].change()}=0</expression>
+                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API v3:link.fcPort.[{#ID}].last()}=11 and {Template EMC Unity REST-API v3:link.fcPort.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1) and {Template EMC Unity REST-API v3:link.fcPort.[{#ID}].change()}=0</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; FibreChannel Port &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -1931,7 +1934,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.ioModule.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.ioModule.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; ioModule &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -1947,7 +1950,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.ioModule.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.ioModule.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; ioModule &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -2143,7 +2146,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.lcc.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.lcc.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; LCC &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -2159,7 +2162,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.lcc.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.lcc.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; LCC &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -2290,10 +2293,132 @@
                             <application_prototypes/>
                             <master_item/>
                         </item_prototype>
+                        <item_prototype>
+                            <name>Allocated size of Lun &quot;{#NAME}&quot;</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>sizeAllocated.lun.[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>Size of space actually allocated in the pool for the LUN:&#13;
+         For thin-provisioned LUNs this as a rule is less than the sizeTotal attribute until the LUN is not fully populated with user data.&#13;
+         For not thin-provisioned LUNs this is approximately equal to the sizeTotal.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>LUN</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Total size of Lun &quot;{#NAME}&quot;</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>sizeTotal.lun.[{#NAME}]</key>
+                            <delay>0</delay>
+                            <history>90d</history>
+                            <trends>365d</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description>LUN size that the system presents to the host or end user.</description>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>LUN</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
+                            <application_prototypes/>
+                            <master_item/>
+                        </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.lun.[{#NAME}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.lun.[{#NAME}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Lun &quot;{#NAME}&quot; health status is {ITEM.VALUE}</name>
@@ -2492,7 +2617,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.memoryModule.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.memoryModule.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; MemoryModule &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -2508,7 +2633,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.memoryModule.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.memoryModule.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; MemoryModule &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -2942,7 +3067,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.pool.[{#NAME}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.pool.[{#NAME}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Pool &quot;{#NAME}&quot; health status is {ITEM.VALUE}</name>
@@ -2958,7 +3083,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:sizeSubscribedPercent.pool.[{#NAME}].last()}&gt;{$SUBSCRIBED_PERCENT:&quot;{#NAME}&quot;}</expression>
+                            <expression>{Template EMC Unity REST-API v3:sizeSubscribedPercent.pool.[{#NAME}].last()}&gt;{$SUBSCRIBED_PERCENT:&quot;{#NAME}&quot;}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Subscribed capacity on pool &quot;{#NAME}&quot; &gt; {$SUBSCRIBED_PERCENT:&quot;{#NAME}&quot;}%</name>
@@ -2974,7 +3099,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:sizeUsedPercent.pool.[{#NAME}].last()}&gt;{$USED_PERCENT:&quot;{#NAME}&quot;}</expression>
+                            <expression>{Template EMC Unity REST-API v3:sizeUsedPercent.pool.[{#NAME}].last()}&gt;{$USED_PERCENT:&quot;{#NAME}&quot;}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Used capacity on pool &quot;{#NAME}&quot; &gt; {$USED_PERCENT:&quot;{#NAME}&quot;}%</name>
@@ -3170,7 +3295,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.powerSupply.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.powerSupply.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; PSU &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -3186,7 +3311,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.powerSupply.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.powerSupply.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; PSU &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -3382,7 +3507,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.sasPort.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.sasPort.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; SAS Port &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -3398,7 +3523,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API:link.sasPort.[{#ID}].last()}=11 and {Template EMC Unity REST-API:link.sasPort.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API:link.sasPort.[{#ID}].change()}=0)</expression>
+                            <expression>({TRIGGER.VALUE}=0 and {Template EMC Unity REST-API v3:link.sasPort.[{#ID}].last()}=11 and {Template EMC Unity REST-API v3:link.sasPort.[{#ID}].change()}=1) or ({TRIGGER.VALUE}=1 and {Template EMC Unity REST-API v3:link.sasPort.[{#ID}].change()}=0)</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; SAS Port &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -3595,7 +3720,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.ssc.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.ssc.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; SSC &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -3611,7 +3736,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.ssc.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.ssc.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; SSC &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -3807,7 +3932,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.ssd.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.ssd.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; SSD &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -3823,7 +3948,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.ssd.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.ssd.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; SSD &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -4019,7 +4144,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.storageProcessor.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.storageProcessor.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Storage Processor &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -4035,7 +4160,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.storageProcessor.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.storageProcessor.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Storage Processor &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -4231,7 +4356,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:health.uncommittedPort.[{#ID}].last()}&lt;&gt;5</expression>
+                            <expression>{Template EMC Unity REST-API v3:health.uncommittedPort.[{#ID}].last()}&lt;&gt;5</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Uncommited Port &quot;{#ID}&quot; health status is {ITEM.VALUE}</name>
@@ -4247,7 +4372,7 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template EMC Unity REST-API:running.uncommittedPort.[{#ID}].last()}&lt;&gt;8</expression>
+                            <expression>{Template EMC Unity REST-API v3:running.uncommittedPort.[{#ID}].last()}&lt;&gt;8</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} -&gt; Uncommited Port &quot;{#ID}&quot; running status is {ITEM.VALUE}</name>
@@ -4314,7 +4439,7 @@
     </templates>
     <triggers>
         <trigger>
-            <expression>{Template EMC Unity REST-API:unity_get_state.py[&quot;--api_ip={HOST.IP}&quot;,&quot;--api_port={$API_PORT}&quot;,&quot;--api_user={$API_USER}&quot;,&quot;--api_password={$API_PASSWORD}&quot;,&quot;--storage_name={HOST.NAME}&quot;,&quot;--discovery&quot;].count(30m,2,le)}&gt;5</expression>
+            <expression>{Template EMC Unity REST-API v3:unity_get_state.py[&quot;--api_ip={HOST.IP}&quot;,&quot;--api_port={$API_PORT}&quot;,&quot;--api_user={$API_USER}&quot;,&quot;--api_password={$API_PASSWORD}&quot;,&quot;--storage_name={HOST.NAME}&quot;,&quot;--discovery&quot;].count(30m,2,le)}&gt;5</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>{HOST.NAME} -&gt; Error occurs in getting metrics</name>
@@ -4328,10 +4453,15 @@
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
-            <tags/>
+            <tags>
+                <tag>
+                    <tag>Department</tag>
+                    <value>MON.RTK</value>
+                </tag>
+            </tags>
         </trigger>
         <trigger>
-            <expression>{Template EMC Unity REST-API:unity_get_state.py[&quot;--api_ip={HOST.IP}&quot;,&quot;--api_port={$API_PORT}&quot;,&quot;--api_user={$API_USER}&quot;,&quot;--api_password={$API_PASSWORD}&quot;,&quot;--storage_name={HOST.NAME}&quot;,&quot;--status&quot;].count(30m,50,ge)}&gt;5</expression>
+            <expression>{Template EMC Unity REST-API v3:unity_get_state.py[&quot;--api_ip={HOST.IP}&quot;,&quot;--api_port={$API_PORT}&quot;,&quot;--api_user={$API_USER}&quot;,&quot;--api_password={$API_PASSWORD}&quot;,&quot;--storage_name={HOST.NAME}&quot;,&quot;--status&quot;].count(30m,50,ge)}&gt;5</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>{HOST.NAME} -&gt; Error occurs in sending metrics</name>
@@ -4344,10 +4474,15 @@
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
-            <tags/>
+            <tags>
+                <tag>
+                    <tag>Department</tag>
+                    <value>MON.RTK</value>
+                </tag>
+            </tags>
         </trigger>
         <trigger>
-            <expression>({Template EMC Unity REST-API:zabbix[host,,items_unsupported].last()})&gt;0</expression>
+            <expression>({Template EMC Unity REST-API v3:zabbix[host,,items_unsupported].last()})&gt;0</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>{HOST.NAME} -&gt; Exist unsupported items</name>
@@ -4360,10 +4495,15 @@
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
-            <tags/>
+            <tags>
+                <tag>
+                    <tag>Department</tag>
+                    <value>MON.RTK</value>
+                </tag>
+            </tags>
         </trigger>
         <trigger>
-            <expression>{Template EMC Unity REST-API:unity_get_state.py[&quot;--api_ip={HOST.IP}&quot;,&quot;--api_port={$API_PORT}&quot;,&quot;--api_user={$API_USER}&quot;,&quot;--api_password={$API_PASSWORD}&quot;,&quot;--storage_name={HOST.NAME}&quot;,&quot;--status&quot;].nodata(3600)}=1</expression>
+            <expression>{Template EMC Unity REST-API v3:unity_get_state.py[&quot;--api_ip={HOST.IP}&quot;,&quot;--api_port={$API_PORT}&quot;,&quot;--api_user={$API_USER}&quot;,&quot;--api_password={$API_PASSWORD}&quot;,&quot;--storage_name={HOST.NAME}&quot;,&quot;--status&quot;].nodata(3600)}=1</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
             <name>{HOST.NAME} -&gt; No data from storage for 1 hours</name>
@@ -4376,7 +4516,12 @@
             <type>0</type>
             <manual_close>0</manual_close>
             <dependencies/>
-            <tags/>
+            <tags>
+                <tag>
+                    <tag>Department</tag>
+                    <value>MON.RTK</value>
+                </tag>
+            </tags>
         </trigger>
     </triggers>
     <value_maps>

@@ -11,6 +11,7 @@ In template "Template EMC Unity REST-API" in section "Macros" need set these mac
 - {$USED_PERCENT}
 
 In agent configuration file, **/etc/zabbix/zabbix_agentd.conf** must be set parameter **ServerActive=xxx.xxx.xxx.xxx**
+
 Scirpt must be copied to zabbix-server or zabbix-proxy, depending on what the torage is being monitored.
 
 

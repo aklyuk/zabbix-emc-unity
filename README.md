@@ -2,6 +2,7 @@
 Python script for monitoring EMC Unity storages
 
 
+For succesfull work of scripts need installed python3, zabbix-sender.
 
 In template "Template EMC Unity REST-API" in section "Macros" need set these macros:
 - {$API_USER}

@@ -27,3 +27,5 @@ Scirpt must be copied to zabbix-server or zabbix-proxy, depending on what the to
 ./unity_get_stateNEW.py --api_ip=xxx.xxx.xxx.xxx --api_port=443 --api_user=username_on_storagedevice --api_password='password' --storage_name="storage-name_in_zabbix" --status
 ```
 If you have executed this script from console from user root or from another user, please check access permission on file **/tmp/unity_state.log**. It must be allow read, write to user zabbix.
+
+- Return code 1 or 2 is zabbix_sender return code. Read here - https://www.zabbix.com/documentation/4.4/manpages/zabbix_sender
